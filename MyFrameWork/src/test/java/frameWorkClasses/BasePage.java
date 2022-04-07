@@ -89,6 +89,10 @@ public class BasePage {
 	//Method:  Cleanup e.g. Close driver
 	
 	//Method:  Enter text in field
+	public void enterText(By pLocator, String enterText) {
+		waitforClick(30, pLocator);
+		driver.findElement(pLocator).sendKeys(enterText);
+	}
 	
 	//Method:  Clear text from field
 	

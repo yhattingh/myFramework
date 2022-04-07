@@ -66,8 +66,8 @@ public class Tests {
 	public void GIVEN_shopperIsOnTheLandingPage_WHEN_shopperEntersDKNYasTheSearchString_AND_shopperClicksTheSearchButton_THEN_DKNYBeDelicious50mlIsDisplayedAsTheFirstItem() {
 		basePageTakeAlot.navigateToHomePage();
 		landingPage.clickSearchBar();
-		landingPage.enterTextInSearchBar();
-		landingPage.clickSearchButton();
+		landingPage.enterTextInSearchBar("DKNY");
+
 		
 	}
 

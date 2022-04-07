@@ -48,10 +48,8 @@ public class LandingPage extends BasePage{
 	 * 
 	 */
 	
-	public void enterTextInSearchBar() {
-		WebElement enterText = driver.findElement(By.name("search"));
-		enterText.sendKeys("DKNY");
-	
+	public void enterTextInSearchBar(String enterTextInSearchBar) {
+		enterText(By.name("search"), enterTextInSearchBar);
 		
 	}
 	
