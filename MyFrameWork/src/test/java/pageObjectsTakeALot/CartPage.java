@@ -9,5 +9,7 @@ public class CartPage extends BasePage{
 	//delete items in the cart
 	
 	//checkout items
+	
+	//paymentOption
 
 }
