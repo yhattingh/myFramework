@@ -54,7 +54,7 @@ public class LandingPage extends BasePage{
 	}
 	
 	public void clickSearchButton() {
-		clickElement(By.cssSelector("search-btn"));
+		clickElement(By.cssSelector("button[type='submit']"));
 		
 	}
 	

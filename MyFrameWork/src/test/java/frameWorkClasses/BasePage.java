@@ -6,6 +6,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+//import org.openqa.selenium.firefox.GeckoDriverInfo;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -28,8 +31,8 @@ public class BasePage {
 		String URL = "https://www.takealot.com/";
 		String pdriverDir = "C:\\Selenium\\";
 		
-		// String pdriverDirFireFox = getDataConfirgPropeties("driverdirFirefox");
-		// String pdriverDirEdge = getDataConfirgPropeties("driverdirEdge");
+		// String pdriverDirFireFox = getDataConfigPropeties("driverdirFirefox");
+		// String pdriverDirEdge = getDataConfigPropeties("driverdirEdge");
 
 		//check if parameter passed as "Chrome"
 		if (browser.equalsIgnoreCase("chrome")) {
@@ -41,8 +44,23 @@ public class BasePage {
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		}
+		else if (browser.equalsIgnoreCase("firefox")) {
+			System.setProperty("webdriver.gecko.driver", pdriverDir+"geckodriver.exe");
+			driver = new FirefoxDriver();
+			driver.get(URL);
+			driver.manage().window().maximize();
+			driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		} 
+		else if (browser.equalsIgnoreCase("edge")) {
+			System.setProperty("webdriver.edge.driver", pdriverDir+"msedgedriver.exe");
+			driver = new EdgeDriver();
+			driver.get(URL);
+			driver.manage().window().maximize();
+			driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		}
 	}
+	}
+
 	
 	//Set the Browser and URL
 	

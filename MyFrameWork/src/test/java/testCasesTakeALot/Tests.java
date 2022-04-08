@@ -67,6 +67,9 @@ public class Tests {
 		basePageTakeAlot.navigateToHomePage();
 		landingPage.clickSearchBar();
 		landingPage.enterTextInSearchBar("DKNY");
+		landingPage.clickSearchButton();
+		
+		//02:35:25 == 1:00
 
 		
 	}
