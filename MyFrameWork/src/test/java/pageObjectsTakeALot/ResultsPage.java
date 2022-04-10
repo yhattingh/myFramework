@@ -22,6 +22,11 @@ public class ResultsPage extends BasePage{
 		return false;
 	}
 	
+	public String verifyText() {
+		String text5 = getElementText(By.cssSelector("h1"));
+		return text5;
+		
+	}
 	
 	/* 3
 	 * GIVEN the shopper selected an item  == ResultsPage.checkItemName

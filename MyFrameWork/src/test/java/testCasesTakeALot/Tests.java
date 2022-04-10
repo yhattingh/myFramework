@@ -74,11 +74,7 @@ public class Tests {
 		landingPage.enterTextInSearchBar("DKNY");
 		landingPage.clickSearchButton();
 		resultsPage.clickFirstItem();
-		
-		
-		
 
-		
 	}
 
 	//3
