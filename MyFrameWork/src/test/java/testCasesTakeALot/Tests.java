@@ -1,8 +1,13 @@
 package testCasesTakeALot;
 
+import javax.naming.directory.SearchResult;
+
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import frameWorkClasses.BasePage;
 import pageObjectsTakeALot.BasePageTakeALot;
 import pageObjectsTakeALot.CartPage;
 import pageObjectsTakeALot.CheckOutPage;
@@ -68,8 +73,10 @@ public class Tests {
 		landingPage.clickSearchBar();
 		landingPage.enterTextInSearchBar("DKNY");
 		landingPage.clickSearchButton();
+		resultsPage.clickFirstItem();
 		
-		//02:35:25 == 1:00
+		
+		
 
 		
 	}

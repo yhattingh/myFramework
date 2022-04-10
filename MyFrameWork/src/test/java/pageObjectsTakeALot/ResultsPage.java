@@ -1,5 +1,7 @@
 package pageObjectsTakeALot;
 
+import org.openqa.selenium.By;
+
 import frameWorkClasses.BasePage;
 
 public class ResultsPage extends BasePage{
@@ -12,9 +14,14 @@ public class ResultsPage extends BasePage{
 	 * 
 	 */
 	
+	public void clickFirstItem() {
+		clickElement(By.cssSelector("div:nth-of-type(2) > .grid.search-product  .product-anchor.product-card-module_product-anchor_TUCBV.sponsored"));
+	}
+	
 	public boolean checkItemName(String checkItemName) {
 		return false;
 	}
+	
 	
 	/* 3
 	 * GIVEN the shopper selected an item  == ResultsPage.checkItemName

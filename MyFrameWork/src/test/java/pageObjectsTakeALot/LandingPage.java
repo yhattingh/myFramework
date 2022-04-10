@@ -62,4 +62,10 @@ public class LandingPage extends BasePage{
 		clickElement(By.name("search"));
 	}
 	
+	public String checkElementTextOfFirstItem() {
+		String text1 = getElementText(By.cssSelector("div:nth-of-type(2) > .grid.search-product  .product-anchor.product-card-module_product-anchor_TUCBV.sponsored"));
+		return text1;
+	}
+	
+	
 }
