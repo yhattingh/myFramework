@@ -5,6 +5,7 @@ import javax.naming.directory.SearchResult;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import frameWorkClasses.BasePage;
@@ -27,7 +28,12 @@ public class Tests {
 	CheckOutPage checkOutPage = new CheckOutPage();
 	BasePageTakeALot basePageTakeAlot = new BasePageTakeALot();
 	
+	@BeforeTest
+	public void setUp() {
+		basePageTakeAlot.clickCookiesButton();
+	}
 	
+
 	/*1
 	 * GIVEN the shopper is on the landing page
 	 * WHEN the shopper clicks on the Cart button

@@ -2,6 +2,7 @@ package pageObjectsTakeALot;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import frameWorkClasses.BasePage;
 
@@ -15,6 +16,7 @@ public class LandingPage extends BasePage{
 	 * DealsPage.checkURL("Takealot/deals");
 	 * DealsPage.checkFirstItem("PhillipsAirFryer")
 	 */
+	
 	
 	public boolean checkLandingPageNavigation() {
 		return false;
@@ -61,10 +63,5 @@ public class LandingPage extends BasePage{
 	public void clickSearchBar() {
 		clickElement(By.name("search"));
 	}
-	
-//	public String checkElementTextOfFirstItem() {
-//		String text1 = getElementText(By.cssSelector("div:nth-of-type(2) > .grid.search-product  .product-anchor.product-card-module_product-anchor_TUCBV.sponsored"));
-//		return text1;
-//	}
 	
 }
