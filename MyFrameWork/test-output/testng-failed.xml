@@ -5,7 +5,7 @@
     <classes>
       <class name="testCasesTakeALot.Tests">
         <methods>
-          <include name="GIVEN_shopperIsOnTheLandingPage_WHEN_shopperEntersDKNYasTheSearchString_AND_shopperClicksTheSearchButton_THEN_DKNYBeDelicious50mlIsDisplayedAsTheFirstItem"/>
+          <include name="GIVEN_shopperIsOnTheLandingPage_WHEN_shopperEntersHillsasTheSearchString_AND_shopperClicksTheSearchButton_THEN_HillsIsDisplayedAsTheFirstItem"/>
         </methods>
       </class> <!-- testCasesTakeALot.Tests -->
     </classes>

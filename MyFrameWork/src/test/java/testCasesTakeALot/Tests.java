@@ -35,11 +35,19 @@ public class Tests {
 	 * AND check that Cart is empty is displayed
 	 */
 	
-	/*2
+	/*2a
 	 * GIVEN the shopper is on the landing page
 	 * WHEN he enters "DKNY" as the search string 
 	 * WHEN clicks the search button
 	 * THEN "DKNY" is displayed as the first item in the grid
+	 * WHEN going to the home page
+	 */
+	
+	/*2b
+	 * GIVEN the shopper is on the landing page
+	 * WHEN he enters "hills" as the search string 
+	 * WHEN clicks the search button
+	 * THEN "hilss" is displayed as the first item in the grid
 	 * WHEN going to the home page
 	 */
 	
@@ -66,7 +74,7 @@ public class Tests {
 		
 	}	
 	
-	//2
+	//2a
 	@Test
 	public void GIVEN_shopperIsOnTheLandingPage_WHEN_shopperEntersDKNYasTheSearchString_AND_shopperClicksTheSearchButton_THEN_DKNYBeDelicious50mlIsDisplayedAsTheFirstItem() {
 		basePageTakeAlot.navigateToHomePage();
@@ -74,6 +82,28 @@ public class Tests {
 		landingPage.enterTextInSearchBar("DKNY");
 		landingPage.clickSearchButton();
 		resultsPage.clickFirstItem();
+
+	}
+	
+	//2b
+	@Test
+	public void GIVEN_shopperIsOnTheLandingPage_WHEN_shopperEntersHillsasTheSearchString_AND_shopperClicksTheSearchButton_THEN_HillsIsDisplayedAsTheSecondItem() {
+		basePageTakeAlot.navigateToHomePage();
+		landingPage.clickSearchBar();
+		landingPage.enterTextInSearchBar("Hills");
+		landingPage.clickSearchButton();
+		resultsPage.clickSecondItem();
+
+	}
+	
+	//2c
+	@Test
+	public void GIVEN_shopperIsOnTheLandingPage_WHEN_shopperEntersHillsasTheSearchString_AND_shopperClicksTheSearchButton_THEN_HillsIsDisplayedAsTheThirdItem() {
+		basePageTakeAlot.navigateToHomePage();
+		landingPage.clickSearchBar();
+		landingPage.enterTextInSearchBar("Hills");
+		landingPage.clickSearchButton();
+		resultsPage.clickThirdItem();
 
 	}
 
