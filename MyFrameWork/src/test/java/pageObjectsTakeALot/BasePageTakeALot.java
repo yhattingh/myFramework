@@ -22,7 +22,7 @@ public class BasePageTakeALot extends BasePage {
 	
 	//DRY code == do not repeat yourself
 	public void clickCookiesButton() {
-		String cookiesButton = ".button.cookies-banner-module_dismiss-button_24Z98";
+		String cookiesButton = "button.cookies-banner-module_dismiss-button_24Z98";
 		if(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(cookiesButton)) != null)
 			clickElement(By.cssSelector(cookiesButton));
 	}

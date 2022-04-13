@@ -1,5 +1,7 @@
 package frameWorkClasses;
 
+import java.util.Iterator;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
@@ -116,6 +118,34 @@ public class BasePage {
 	//Method:  Select from drop-down
 	
 	//Method:  Get text on Method - pass 
+	
+	// Switch window / tab
+	public void SwitchToNewTab() {
+		Set<String> handles = driver.getWindowHandles(); // selenium will check how many windows are currently open,
+															// this will store the ID for both parent and child window
+		Iterator<String> it = handles.iterator(); // using the it object you can access the ID
+		String parentWindowID = it.next();
+		String childWindowID = it.next();
+		driver.switchTo().window(childWindowID); //switch to new window by passing the ID of the child window
+	}
+	
+	public void SwitchToParent() {
+		Set<String> handles = driver.getWindowHandles(); // selenium will check how many windows are currently open,
+		// this will store the ID for both parent and child window
+		Iterator<String> it = handles.iterator(); // using the it object you can access the ID
+		String parentWindowID = it.next();
+		String childWindowID = it.next();
+		driver.switchTo().window(parentWindowID); //switch to new parent
+	}
+	
+	public void closeChildBrowserTab() {
+		Set<String> handles = driver.getWindowHandles(); // selenium will check how many windows are currently open,
+		// this will store the ID for both parent and child window
+		Iterator<String> it = handles.iterator(); // using the it object you can access the ID
+		String parentWindowID = it.next();
+		String childWindowID = it.next();
+		driver.switchTo().window(childWindowID).close(); //close child window
+	}
 
 
 }

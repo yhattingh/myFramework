@@ -16,6 +16,7 @@ import pageObjectsTakeALot.DealsPage;
 import pageObjectsTakeALot.LandingPage;
 import pageObjectsTakeALot.LoginPage;
 import pageObjectsTakeALot.ResultsPage;
+import pageObjectsTakeALot.SelectedItem;
 
 public class Tests {
 	
@@ -27,6 +28,8 @@ public class Tests {
 	DealsPage dealsPage = new DealsPage();
 	CheckOutPage checkOutPage = new CheckOutPage();
 	BasePageTakeALot basePageTakeAlot = new BasePageTakeALot();
+	SelectedItem selectedItem = new SelectedItem();
+	 
 	
 	@BeforeTest
 	public void setUp() {
@@ -88,6 +91,8 @@ public class Tests {
 		landingPage.enterTextInSearchBar("DKNY");
 		landingPage.clickSearchButton();
 		resultsPage.clickFirstItem();
+		resultsPage.SwitchToNewTab();
+		selectedItem.getTitleText();	
 
 	}
 	
@@ -99,6 +104,8 @@ public class Tests {
 		landingPage.enterTextInSearchBar("Hills");
 		landingPage.clickSearchButton();
 		resultsPage.clickSecondItem();
+		resultsPage.SwitchToNewTab();
+		selectedItem.getTitleText();
 
 	}
 	
@@ -110,6 +117,8 @@ public class Tests {
 		landingPage.enterTextInSearchBar("Hills");
 		landingPage.clickSearchButton();
 		resultsPage.clickThirdItem();
+		resultsPage.SwitchToNewTab();
+		selectedItem.getTitleText();
 
 	}
 
