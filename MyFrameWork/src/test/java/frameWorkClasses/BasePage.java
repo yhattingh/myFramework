@@ -146,6 +146,15 @@ public class BasePage {
 		String childWindowID = it.next();
 		driver.switchTo().window(childWindowID).close(); //close child window
 	}
+	
+	public void closeParentBrowserTab() {
+		Set<String> handles = driver.getWindowHandles(); // selenium will check how many windows are currently open,
+		// this will store the ID for both parent and child window
+		Iterator<String> it = handles.iterator(); // using the it object you can access the ID
+		String parentWindowID = it.next();
+		String childWindowID = it.next();
+		driver.switchTo().window(parentWindowID).close(); //close child window
+	}
 
 
 }

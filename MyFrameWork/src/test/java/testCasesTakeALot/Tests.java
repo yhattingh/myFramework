@@ -16,7 +16,7 @@ import pageObjectsTakeALot.DealsPage;
 import pageObjectsTakeALot.LandingPage;
 import pageObjectsTakeALot.LoginPage;
 import pageObjectsTakeALot.ResultsPage;
-import pageObjectsTakeALot.SelectedItem;
+import pageObjectsTakeALot.SelectedItemPage;
 
 public class Tests {
 	
@@ -28,7 +28,7 @@ public class Tests {
 	DealsPage dealsPage = new DealsPage();
 	CheckOutPage checkOutPage = new CheckOutPage();
 	BasePageTakeALot basePageTakeAlot = new BasePageTakeALot();
-	SelectedItem selectedItem = new SelectedItem();
+	SelectedItemPage selectedItem = new SelectedItemPage();
 	 
 	
 	@BeforeTest
@@ -92,7 +92,7 @@ public class Tests {
 		landingPage.clickSearchButton();
 		resultsPage.clickFirstItem();
 		resultsPage.SwitchToNewTab();
-		selectedItem.getTitleText();	
+		System.out.println(selectedItem.getTextOfTitleElement());
 
 	}
 	
@@ -105,7 +105,7 @@ public class Tests {
 		landingPage.clickSearchButton();
 		resultsPage.clickSecondItem();
 		resultsPage.SwitchToNewTab();
-		selectedItem.getTitleText();
+		System.out.println(selectedItem.getTextOfTitleElement());
 
 	}
 	
@@ -114,11 +114,11 @@ public class Tests {
 	public void GIVEN_shopperIsOnTheLandingPage_WHEN_shopperEntersHillsasTheSearchString_AND_shopperClicksTheSearchButton_THEN_HillsIsDisplayedAsTheThirdItem() {
 		basePageTakeAlot.navigateToHomePage();
 		landingPage.clickSearchBar();
-		landingPage.enterTextInSearchBar("Hills");
+		landingPage.enterTextInSearchBar("logitech");
 		landingPage.clickSearchButton();
 		resultsPage.clickThirdItem();
 		resultsPage.SwitchToNewTab();
-		selectedItem.getTitleText();
+		System.out.println(selectedItem.getTextOfTitleElement());
 
 	}
 
