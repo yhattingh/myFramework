@@ -27,4 +27,12 @@ public class BasePageTakeALot extends BasePage {
 			clickElement(By.cssSelector(cookiesButton));
 	}
 
+	public void quizPopUp() {
+		String nextButton = "_hj-3HqTJ__styles__surveyActionButton";
+		if(ExpectedConditions.visibilityOfElementLocated(By.className("_hj-2fsWS__styles__closeEndedOptionText"))!=null)
+		clickElement(By.className("_hj-2fsWS__styles__closeEndedOptionText"));
+		clickElement(By.className(nextButton));
+		clickElement(By.className(nextButton));
+		clickElement(By.className("_hj-3Y4y-__styles__closeButton"));
+	}
 }

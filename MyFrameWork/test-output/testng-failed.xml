@@ -6,7 +6,11 @@
       <class name="testCasesTakeALot.Tests">
         <methods>
           <include name="setUp"/>
-          <include name="GIVEN_shopperIsOnTheLandingPage_WHEN_shopperEntersHillsasTheSearchString_AND_shopperClicksTheSearchButton_THEN_HillsIsDisplayedAsTheThirdItem"/>
+          <include name="quitBrowser"/>
+          <include name="GIVEN_shopperIsOnTheLandingPage_WHEN_shopperEntersDKNYasTheSearchString_AND_shopperClicksTheSearchButton_THEN_DKNYDisplayedAsTheFirstItem"/>
+          <include name="GIVEN_shopperIsOnTheLandingPage_WHEN_shopperEntersGeniusAsTheSearchString_AND_shopperClicksTheSearchButton_THEN_GeniusIsDisplayedAsTheThirdItem"/>
+          <include name="GIVEN_shopperIsOnTheLandingPage_WHEN_shopperEntersHillsAsTheSearchString_AND_shopperClicksTheSearchButton_THEN_HillsIsDisplayedAsTheThirdItem"/>
+          <include name="GIVEN_shopperIsOnTheLandingPage_WHEN_shopperEntersHillsasTheSearchString_AND_shopperClicksTheSearchButton_THEN_HillsIsDisplayedAsTheSecondItem"/>
         </methods>
       </class> <!-- testCasesTakeALot.Tests -->
     </classes>

@@ -1,10 +1,10 @@
 package testCasesTakeALot;
 
-import javax.naming.directory.SearchResult;
+import static org.testng.Assert.assertTrue;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+import org.testng.Reporter;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -36,6 +36,10 @@ public class Tests {
 		basePageTakeAlot.clickCookiesButton();
 	}
 	
+	@AfterTest
+	public void quitBrowser() {
+		BasePage.driver.quit();
+	}
 
 	/*1
 	 * GIVEN the shopper is on the landing page
@@ -85,41 +89,140 @@ public class Tests {
 	
 	//2a
 	@Test
-	public void GIVEN_shopperIsOnTheLandingPage_WHEN_shopperEntersDKNYasTheSearchString_AND_shopperClicksTheSearchButton_THEN_DKNYBeDelicious50mlIsDisplayedAsTheFirstItem() {
+	public void GIVEN_shopperIsOnTheLandingPage_WHEN_shopperEntersDKNYasTheSearchString_AND_shopperClicksTheSearchButton_THEN_DKNYDisplayedAsTheFirstItem() {
+		
+		//Declare variables
+		String searchedText = "DKNY";
+		String actualText; // to have all declared variables in one place but we cannot have actualText = selectedItem.getTextOfTitleElement(); here 
+							// because it then expects we already have this variable which we only get in line 104
+		String expectedResult = searchedText;
+				
 		basePageTakeAlot.navigateToHomePage();
 		landingPage.clickSearchBar();
-		landingPage.enterTextInSearchBar("DKNY");
+		landingPage.enterTextInSearchBar(searchedText);
 		landingPage.clickSearchButton();
 		resultsPage.clickFirstItem();
 		resultsPage.SwitchToNewTab();
-		System.out.println(selectedItem.getTextOfTitleElement());
-
+		//System.out.println(selectedItem.getTextOfBrandLink());
+		actualText = selectedItem.getTextOfBrandLink();
+		System.out.println("Actual Result:" + " " + actualText);
+		//Reporter.log("Expected Text: " + searchedText + " and " + "Actual Text: " + actualText);
+		Reporter.log("Expected Result : " + expectedResult);
+		Reporter.log("Actual Result : " + actualText);
+		Assert.assertEquals(actualText, expectedResult);
+		resultsPage.closeChildBrowserTab();
 	}
 	
 	//2b
 	@Test
 	public void GIVEN_shopperIsOnTheLandingPage_WHEN_shopperEntersHillsasTheSearchString_AND_shopperClicksTheSearchButton_THEN_HillsIsDisplayedAsTheSecondItem() {
+		
+		//Declare variables
+		String searchedText = "Hills";
+		String actualText; 
+		String expectedResult = searchedText;
+				
 		basePageTakeAlot.navigateToHomePage();
 		landingPage.clickSearchBar();
-		landingPage.enterTextInSearchBar("Hills");
+		landingPage.enterTextInSearchBar(searchedText);
 		landingPage.clickSearchButton();
 		resultsPage.clickSecondItem();
 		resultsPage.SwitchToNewTab();
-		System.out.println(selectedItem.getTextOfTitleElement());
-
+		actualText = selectedItem.getTextOfBrandLink();
+		System.out.println("Actual Result:" + " " + actualText);
+		Reporter.log("Expected Result : " + expectedResult);
+		Reporter.log("Actual Result : " + actualText);
+		Assert.assertEquals(actualText, expectedResult);
+		resultsPage.closeChildBrowserTab();
 	}
 	
 	//2c
 	@Test
-	public void GIVEN_shopperIsOnTheLandingPage_WHEN_shopperEntersHillsasTheSearchString_AND_shopperClicksTheSearchButton_THEN_HillsIsDisplayedAsTheThirdItem() {
+	public void GIVEN_shopperIsOnTheLandingPage_WHEN_shopperEntersGeniusAsTheSearchString_AND_shopperClicksTheSearchButton_THEN_GeniusIsDisplayedAsTheThirdItem() {
+		
+		//Declare variables
+		String searchedText = "Genius";
+		String actualText; 
+		String expectedResult = searchedText;
+				
 		basePageTakeAlot.navigateToHomePage();
 		landingPage.clickSearchBar();
-		landingPage.enterTextInSearchBar("logitech");
+		landingPage.enterTextInSearchBar(searchedText);
 		landingPage.clickSearchButton();
 		resultsPage.clickThirdItem();
 		resultsPage.SwitchToNewTab();
-		System.out.println(selectedItem.getTextOfTitleElement());
+		actualText = selectedItem.getTextOfBrandLink();
+		System.out.println("Actual Result:" + " " + actualText);
+		Reporter.log("Expected Result : " + expectedResult);
+		Reporter.log("Actual Text : " + actualText);
+		assertTrue(actualText.contains(expectedResult));
+		resultsPage.closeChildBrowserTab();
+	}
+	
+	//2d
+	@Test
+	public void GIVEN_shopperIsOnTheLandingPage_WHEN_shopperEntersBootAsTheSearchString_AND_shopperClicksTheSearchButton_THEN_BootIsDisplayedAsTheThirdItem() {
+		
+		//Declare variables
+		String searchedProductInput = "Boot";
+		String searchedBrand = "TTP";
+		
+		String actualTextOfProductTitle; 
+		String expectedProductResult = searchedProductInput;
+		
+		String actualTextOfBrandLink;
+		String expectedTextOfBrandLink = searchedBrand;
+				
+		basePageTakeAlot.navigateToHomePage();
+		landingPage.clickSearchBar();
+		landingPage.enterTextInSearchBar(searchedProductInput);
+		landingPage.clickSearchButton();
+		resultsPage.clickThirdItem();
+		resultsPage.SwitchToNewTab();
+		actualTextOfProductTitle = selectedItem.getTextOfProductTitle();
+		System.out.println("Actual PRODUCT contains the word " + " " + expectedProductResult + " " + "and the product text is" + " " + actualTextOfProductTitle);
+		actualTextOfBrandLink = selectedItem.getTextOfBrandLink();
+		System.out.println("Actual BRAND = " + actualTextOfBrandLink);
+		Reporter.log("Expected Product Title Result : " + expectedProductResult);
+		Reporter.log("Actual Product Title Result : " + actualTextOfProductTitle);
+		Reporter.log("Expected Brand Link  Result : " + expectedTextOfBrandLink);
+		Reporter.log("Actual Brand Link Result : " + actualTextOfBrandLink);
+		Assert.assertTrue(actualTextOfProductTitle.contains(expectedProductResult));
+		Assert.assertEquals(actualTextOfBrandLink, expectedTextOfBrandLink);
+		resultsPage.closeChildBrowserTab();
+	}
 
+	//2e
+	@Test
+	public void GIVEN_shopperIsOnTheLandingPage_WHEN_shopperEntersHillsAsTheSearchString_AND_shopperClicksTheSearchButton_THEN_HillsIsDisplayedAsTheThirdItem() {
+		
+		//Declare variables
+		String searchedProductInput = "Puppy";
+		String searchedBrand = "Hills";
+		
+		String actualTextOfProductTitle; 
+		String expectedProductResult = searchedProductInput;
+		
+		String actualTextOfBrandLink;
+		String expectedTextOfBrandLink = searchedBrand;
+				
+		basePageTakeAlot.navigateToHomePage();
+		landingPage.clickSearchBar();
+		landingPage.enterTextInSearchBar(searchedBrand);
+		landingPage.clickSearchButton();
+		resultsPage.clickThirdItem();
+		resultsPage.SwitchToNewTab();
+		actualTextOfProductTitle = selectedItem.getTextOfProductTitle();
+		System.out.println("Actual PRODUCT contains the word " + " " + expectedProductResult + " " + "and the product text is" + " " + actualTextOfProductTitle);
+		actualTextOfBrandLink = selectedItem.getTextOfBrandLink();
+		System.out.println("Actual BRAND = " + actualTextOfBrandLink);
+		Reporter.log("Expected Product Title Result : " + expectedProductResult);
+		Reporter.log("Actual Product Title Result : " + actualTextOfProductTitle);
+		Reporter.log("Expected Brand Link  Result : " + expectedTextOfBrandLink);
+		Reporter.log("Actual Brand Link Result : " + actualTextOfBrandLink);
+		Assert.assertTrue(actualTextOfProductTitle.contains(expectedProductResult));
+		Assert.assertEquals(actualTextOfBrandLink, expectedTextOfBrandLink);
+		resultsPage.closeChildBrowserTab();
 	}
 
 	//3
