@@ -11,6 +11,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class BasePage { 
@@ -79,14 +80,22 @@ public class BasePage {
 	}
 	
 	// ...Wait for URL
-	public void waitForUrl(int elementWait, String urlContains) {
+	public void waitForUrl(int elementWait, String pLocator) {
 	WebDriverWait wait = new WebDriverWait(driver, elementWait);
-	wait.until(ExpectedConditions.urlContains(urlContains));
+	wait.until(ExpectedConditions.urlContains(pLocator));
 	}
 	
 	//Method:  Get text on Element
 	public String getElementText(By pLocator) {
 		String elementText = getElement(pLocator).getText();
+		return elementText;
+	}
+	
+	
+	//Method:  get text on element using innerHTML (not used for now)
+	public String getInnerHTML(By pLocator) {
+		String elementText = getElement(pLocator).getAttribute("innerHTML");
+		System.out.println(elementText);
 		return elementText;
 	}
 	
@@ -97,6 +106,10 @@ public class BasePage {
 	}
 	
 	//Method:  Check that Element exists
+	public boolean elementExists(By pLocator) {
+		boolean display = getElement(pLocator).isDisplayed();
+		return display;
+	}
 	
 	//Method:  Get Element
 	public WebElement getElement(By pLocator) {
@@ -106,6 +119,9 @@ public class BasePage {
 	
 	
 	//Method:  Cleanup e.g. Close driver
+	public void cleanUp() {
+		driver.close();
+	}
 	
 	//Method:  Enter text in field
 	public void enterText(By pLocator, String enterText) {
@@ -113,14 +129,36 @@ public class BasePage {
 		driver.findElement(pLocator).sendKeys(enterText);
 	}
 	
+
 	//Method:  Clear text from field
+	public void clearText() {
+				
+	}
 	
 	//Method:  Select from drop-down
+	public void selectDropdown(By pLocator, String pValue) {
+		waitForElement(20, pLocator);
+		// create an instance of the dropdown object
+		Select selectDropDown = new Select(getElement(pLocator)); // type = Select
+		selectDropDown.selectByVisibleText(pValue); // we are selecting from visible text
+	}
 	
 	//Method:  Get text on Method - pass 
 	
+	//Method:  Get title
+	public String getTitle() {
+		String getTitle = driver.getTitle();
+		return getTitle;
+	}
+	
+	//Method:  Get current URL
+	public String getURL() {
+		String getCurrentURL = driver.getCurrentUrl();
+		return getCurrentURL;
+	}
+	
 	// Switch window / tab
-	public void SwitchToNewTab() {
+	public void switchToNewTab() {
 		Set<String> handles = driver.getWindowHandles(); // selenium will check how many windows are currently open,
 															// this will store the ID for both parent and child window
 		Iterator<String> it = handles.iterator(); // using the it object you can access the ID
@@ -129,7 +167,7 @@ public class BasePage {
 		driver.switchTo().window(childWindowID); //switch to new window by passing the ID of the child window
 	}
 	
-	public void SwitchToParent() {
+	public void switchToParent() {
 		Set<String> handles = driver.getWindowHandles(); // selenium will check how many windows are currently open,
 		// this will store the ID for both parent and child window
 		Iterator<String> it = handles.iterator(); // using the it object you can access the ID
