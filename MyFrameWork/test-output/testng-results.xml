@@ -1,38 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="9" total="10" passed="1" failed="0" skipped="0">
+<testng-results ignored="10" total="11" passed="1" failed="0" skipped="0">
   <reporter-output>
     <line>
-      <![CDATA[Item count is: 0]]>
+      <![CDATA[Count is Correct (1 item)]]>
     </line>
     <line>
-      <![CDATA[Count is Correct 0]]>
+      <![CDATA[Text is (1 item)]]>
     </line>
     <line>
-      <![CDATA[Text is 0]]>
+      <![CDATA[Count is Correct (3 items)]]>
+    </line>
+    <line>
+      <![CDATA[Text is (3 items)]]>
     </line>
   </reporter-output>
-  <suite started-at="2022-04-21T08:35:40Z" name="Default suite" finished-at="2022-04-21T08:35:44Z" duration-ms="4051">
+  <suite started-at="2022-04-25T07:55:36Z" name="Default suite" finished-at="2022-04-25T07:55:52Z" duration-ms="15941">
     <groups>
     </groups>
-    <test started-at="2022-04-21T08:35:40Z" name="Default test" finished-at="2022-04-21T08:35:44Z" duration-ms="4051">
+    <test started-at="2022-04-25T07:55:36Z" name="Default test" finished-at="2022-04-25T07:55:52Z" duration-ms="15941">
       <class name="testCasesTakeALot.Tests">
-        <test-method is-config="true" signature="setUp()[pri:0, instance:testCasesTakeALot.Tests@4ae33a11]" started-at="2022-04-21T08:35:40Z" name="setUp" finished-at="2022-04-21T08:35:42Z" duration-ms="1926" status="PASS">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:testCasesTakeALot.Tests@5b58ed3c]" started-at="2022-04-25T07:55:36Z" name="setUp" finished-at="2022-04-25T07:55:38Z" duration-ms="1343" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method signature="GIVEN_shopperIsOnTheLandingPage_WHEN_shopperHoversOverTrollie_THEN_displayItemCount()[pri:0, instance:testCasesTakeALot.Tests@4ae33a11]" started-at="2022-04-21T08:35:42Z" name="GIVEN_shopperIsOnTheLandingPage_WHEN_shopperHoversOverTrollie_THEN_displayItemCount" finished-at="2022-04-21T08:35:44Z" duration-ms="2108" status="PASS">
+        <test-method signature="GIVEN_shopperOnLandingPage_WHEN_productSelectedFromExcel_THEN_addsToCart(java.lang.String, java.lang.String)[pri:0, instance:testCasesTakeALot.Tests@5b58ed3c]" started-at="2022-04-25T07:55:39Z" name="GIVEN_shopperOnLandingPage_WHEN_productSelectedFromExcel_THEN_addsToCart" data-provider="TakeALot" finished-at="2022-04-25T07:55:52Z" duration-ms="13793" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[EcoFlow RIVER Pro]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[3]]>
+              </value>
+            </param>
+          </params>
           <reporter-output>
             <line>
-              <![CDATA[Item count is: 0]]>
+              <![CDATA[Count is Correct (1 item)]]>
             </line>
             <line>
-              <![CDATA[Count is Correct 0]]>
+              <![CDATA[Text is (1 item)]]>
             </line>
             <line>
-              <![CDATA[Text is 0]]>
+              <![CDATA[Count is Correct (3 items)]]>
+            </line>
+            <line>
+              <![CDATA[Text is (3 items)]]>
             </line>
           </reporter-output>
-        </test-method> <!-- GIVEN_shopperIsOnTheLandingPage_WHEN_shopperHoversOverTrollie_THEN_displayItemCount -->
+        </test-method> <!-- GIVEN_shopperOnLandingPage_WHEN_productSelectedFromExcel_THEN_addsToCart -->
       </class> <!-- testCasesTakeALot.Tests -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
