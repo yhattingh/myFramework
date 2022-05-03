@@ -46,10 +46,10 @@ public class Tests {
 		// basePageTakeAlot.quizPopUp();
 	}
 
-//	@AfterTest
-//	public void quitBrowser() {
-//		BasePage.driver.quit();
-//	}
+	@AfterTest
+	public void cleanUp() throws InterruptedException {
+		selectedItem.cleanUp();
+	}
 //	
 //	@AfterMethod
 //	public void closeChildWindow() {
@@ -368,7 +368,7 @@ public class Tests {
 		Assert.assertEquals(cartPage.checkEmptyCart(), true);
 		Assert.assertEquals(cartPage.checkEmptyCartWithIsDisplayed(), true);
 		Reporter.log("Removed from cart? " + cartPage.checkEmptyCart());
-		BasePage.driver.quit();
+
 	}
 
 	// 2H - verify cart is empty
@@ -385,18 +385,16 @@ public class Tests {
 		// number
 		Assert.assertEquals(landingPage.cartSummary2(expectedResult), true); // use variable declared
 
-		BasePage.driver.quit();
 	}
 
 	// 2I - read from Excel
 	@Test(dataProvider = "TakeALot", dataProviderClass = ReadDataFromExcel.class)
 	public void GIVEN_shopperOnLandingPage_WHEN_productSelectedFromExcel_THEN_addsToCart(String searchInput, String qty)
 			throws InterruptedException {
-		System.out.println(searchInput + " " + qty);
+		System.out.println("What am I reading from excel?" + " " + searchInput + " " + qty);
 
 		// Declare variables
 		String searchedProductInput = searchInput;
-		String selectQuantity = qty;
 
 		basePageTakeAlot.navigateToHomePage();
 		landingPage.clickSearchBar();
@@ -409,11 +407,44 @@ public class Tests {
 		selectedItem.clickGoToCartButton();
 
 		Assert.assertEquals(cartPage.checkCartItemCount("(1 item)"), true);
-		cartPage.selectQuantity(selectQuantity);
-		Assert.assertEquals(cartPage.checkCartItemCount("(3 items)"), true);
-//		BasePage.driver.quit();
-//		cartPage.closeChildBrowserTab();
-//		cartPage.closeParentBrowserTab();
+		cartPage.selectQuantity(qty);
+		Assert.assertEquals(cartPage.checkCartItemCount(qty), true);
+		System.out.println("This is what I expect: " + qty);
+		Reporter.log("This is what I expect: " + qty);
+		cartPage.removeFromCart();
+		Assert.assertTrue(cartPage.checkEmptyCart());
+		cartPage.closeChildBrowserTab();
 
 	}
+
+//	@Test(dataProvider = "TakeALot", dataProviderClass = ReadDataFromExcel.class)
+//	public void GIVEN_shopperOnLandingPage_WHEN_productSelectedFromExcel_THEN_addsToWishList(String searchInput, String qty)
+//			throws InterruptedException {
+//		System.out.println(searchInput + " " + qty);
+//
+//		// Declare variables
+//		String searchedProductInput = searchInput;
+//		String selectQuantity = qty;
+//
+//		basePageTakeAlot.navigateToHomePage();
+//		landingPage.clickSearchBar();
+//		landingPage.enterTextInSearchBar(searchedProductInput);
+//		landingPage.clickSearchButton();
+//		resultsPage.clickSecondItem();
+//		resultsPage.switchToNewTab();
+//
+//		selectedItem.clickAddToCartLink();
+//		selectedItem.clickGoToCartButton();
+//
+//		Assert.assertEquals(cartPage.checkCartItemCount("(1 item)"), true);
+//		cartPage.selectQuantity(selectQuantity);
+//		Assert.assertEquals(cartPage.checkCartItemCount("(3 items)"), true);
+//		cartPage.removeFromCart();
+//		Assert.assertTrue(cartPage.checkEmptyCart());
+//		cartPage.closeChildBrowserTab();
+//
+//	}
+
+	// replace thread.sleep with another solution for the itemCount method
+
 }

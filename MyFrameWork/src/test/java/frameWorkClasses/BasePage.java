@@ -19,6 +19,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
+
 public class BasePage {
 
 	// Declare the Webdriver
@@ -38,28 +40,31 @@ public class BasePage {
 			// When using the config properties file: Set Parameter values === in the config file it is referred to properties and values
 			String browser = getDataConfigProperties("browser");
 			String URL = getDataConfigProperties("URL");
-			String pdriverDir = getDataConfigProperties("pdriverDir");
+			//String pdriverDir = getDataConfigProperties("pdriverDir");
 
-			// String pdriverDirFireFox = getDataConfigPropeties("driverdirFirefox");
-			// String pdriverDirEdge = getDataConfigPropeties("driverdirEdge");
+//			 String pdriverDirFireFox = getDataConfigProperties("driverdirFirefox");
+//			 String pdriverDirEdge = getDataConfigProperties("driverdirEdge");
 
 			// check if parameter passed as "Chrome"
 			if (browser.equalsIgnoreCase("chrome")) {
+				WebDriverManager.chromedriver().setup(); // auto-update chrome web driver
 				// Set path to chromedriver.exe
-				System.setProperty("webdriver.chrome.driver", pdriverDir + "chromedriver.exe");
+				//System.setProperty("webdriver.chrome.driver", pdriverDir + "chromedriver.exe");
 				// create an instance of Chrome
 				driver = new ChromeDriver();
 				driver.get(URL);
 				driver.manage().window().maximize();
 				driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 			} else if (browser.equalsIgnoreCase("firefox")) {
-				System.setProperty("webdriver.gecko.driver", pdriverDir + "geckodriver.exe");
+				WebDriverManager.firefoxdriver().setup();
+				//System.setProperty("webdriver.gecko.driver", pdriverDir + "geckodriver.exe");
 				driver = new FirefoxDriver();
 				driver.get(URL);
 				driver.manage().window().maximize();
 				driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 			} else if (browser.equalsIgnoreCase("edge")) {
-				System.setProperty("webdriver.edge.driver", pdriverDir + "msedgedriver.exe");
+				WebDriverManager.edgedriver().setup();
+				//System.setProperty("webdriver.edge.driver", pdriverDir + "msedgedriver.exe");
 				driver = new EdgeDriver();
 				driver.get(URL);
 				driver.manage().window().maximize();
@@ -88,7 +93,7 @@ public class BasePage {
 
 	// Method: Cleanup e.g. Close driver
 	public void cleanUp() {
-		driver.close();
+		driver.quit();
 	}
 
 	// Method: Clear text from field

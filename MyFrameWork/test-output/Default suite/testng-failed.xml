@@ -6,7 +6,7 @@
       <class name="testCasesTakeALot.Tests">
         <methods>
           <include name="setUp"/>
-          <include name="GIVEN_shopperOnLandingPage_WHEN_productSelectedFromExcel_THEN_addsToCart" invocation-numbers="0"/>
+          <include name="GIVEN_shopperOnLandingPage_WHEN_productSelectedFromExcel_THEN_addsToCart" invocation-numbers="1"/>
         </methods>
       </class> <!-- testCasesTakeALot.Tests -->
     </classes>
