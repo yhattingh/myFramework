@@ -7,6 +7,7 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
+import frameWorkClasses.BasePage;
 import frameWorkClasses.ReadExcel;
 import pageObjectsTakeALot.BasePageTakeALot;
 import pageObjectsTakeALot.CartPage;
@@ -50,8 +51,10 @@ public class SingleTestForTestNGTesting {
 
 		// Declare variables
 		String searchedProductInput = searchInput;
+		
 
-		basePageTakeAlot.navigateToHomePage();
+		//basePageTakeAlot.navigateToHomePage();
+		
 		landingPage.clickSearchBar();
 		landingPage.enterTextInSearchBar(searchedProductInput);
 		landingPage.clickSearchButton();

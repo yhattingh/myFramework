@@ -3,12 +3,12 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="testCasesTakeALot.Tests">
+      <class name="testCasesDatePicker.testsDatePicker">
         <methods>
+          <include name="datePickerTest1"/>
           <include name="setUp"/>
-          <include name="GIVEN_shopperOnLandingPage_WHEN_productSelectedFromExcel_THEN_addsToCart" invocation-numbers="1"/>
         </methods>
-      </class> <!-- testCasesTakeALot.Tests -->
+      </class> <!-- testCasesDatePicker.testsDatePicker -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

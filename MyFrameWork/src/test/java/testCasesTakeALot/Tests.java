@@ -104,7 +104,7 @@ public class Tests {
 							// line 104
 		String expectedResult = searchedText;
 
-		basePageTakeAlot.navigateToHomePage();
+		//basePageTakeAlot.navigateToHomePage();
 		landingPage.clickSearchBar();
 		landingPage.enterTextInSearchBar(searchedText);
 		landingPage.clickSearchButton();
@@ -130,7 +130,7 @@ public class Tests {
 		String actualText;
 		String expectedResult = searchedText;
 
-		basePageTakeAlot.navigateToHomePage();
+		//basePageTakeAlot.navigateToHomePage();
 		landingPage.clickSearchBar();
 		landingPage.enterTextInSearchBar(searchedText);
 		landingPage.clickSearchButton();
@@ -153,7 +153,7 @@ public class Tests {
 		String actualText;
 		String expectedResult = searchedText;
 
-		basePageTakeAlot.navigateToHomePage();
+//		basePageTakeAlot.navigateToHomePage();
 		landingPage.clickSearchBar();
 		landingPage.enterTextInSearchBar(searchedText);
 		landingPage.clickSearchButton();
@@ -182,7 +182,7 @@ public class Tests {
 		String actualTextOfBrandLink;
 		String expectedTextOfBrandLink = searchedBrand;
 
-		basePageTakeAlot.navigateToHomePage();
+//		basePageTakeAlot.navigateToHomePage();
 		landingPage.clickSearchBar();
 		landingPage.enterTextInSearchBar(searchedProductInput);
 		landingPage.clickSearchButton();
@@ -220,7 +220,7 @@ public class Tests {
 		String actualTextOfBrandLink;
 		String expectedTextOfBrandLink = searchedBrand;
 
-		basePageTakeAlot.navigateToHomePage();
+//		basePageTakeAlot.navigateToHomePage();
 		landingPage.clickSearchBar();
 		landingPage.enterTextInSearchBar(searchedBrand);
 		landingPage.clickSearchButton();
@@ -258,7 +258,7 @@ public class Tests {
 		String actualItemCount;
 		String expectedItemCount = "(1 item)";
 
-		basePageTakeAlot.navigateToHomePage();
+//		basePageTakeAlot.navigateToHomePage();
 		landingPage.clickSearchBar();
 		landingPage.enterTextInSearchBar(searchedProductInput);
 		landingPage.clickSearchButton();
@@ -309,7 +309,7 @@ public class Tests {
 		// Declare variables
 		String searchedProductInput = "TTP Women's Lace-Up Combat Boot XB1601 with Patent Finish";
 
-		basePageTakeAlot.navigateToHomePage();
+//		basePageTakeAlot.navigateToHomePage();
 		landingPage.clickSearchBar();
 		landingPage.enterTextInSearchBar(searchedProductInput);
 		landingPage.clickSearchButton();
@@ -344,7 +344,7 @@ public class Tests {
 		// Declare variables
 		String searchedProductInput = "EcoFlow RIVER Pro";
 
-		basePageTakeAlot.navigateToHomePage();
+//		basePageTakeAlot.navigateToHomePage();
 		landingPage.clickSearchBar();
 		landingPage.enterTextInSearchBar(searchedProductInput);
 		landingPage.clickSearchButton();
@@ -378,7 +378,7 @@ public class Tests {
 		// declare variables
 		String expectedResult = "0";
 
-		basePageTakeAlot.navigateToHomePage();
+//		basePageTakeAlot.navigateToHomePage();
 		System.out.println("Item count is: " + landingPage.cartSummary());
 		Reporter.log("Item count is: " + landingPage.cartSummary());
 		// Assert.assertEquals(landingPage.cartSummary2("0"), true); //enter expected
@@ -396,7 +396,7 @@ public class Tests {
 		// Declare variables
 		String searchedProductInput = searchInput;
 
-		basePageTakeAlot.navigateToHomePage();
+//		basePageTakeAlot.navigateToHomePage();
 		landingPage.clickSearchBar();
 		landingPage.enterTextInSearchBar(searchedProductInput);
 		landingPage.clickSearchButton();

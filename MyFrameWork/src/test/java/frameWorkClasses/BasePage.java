@@ -40,6 +40,9 @@ public class BasePage {
 			// When using the config properties file: Set Parameter values === in the config file it is referred to properties and values
 			String browser = getDataConfigProperties("browser");
 			String URL = getDataConfigProperties("URL");
+			String URL2 = getDataConfigProperties("URL2");
+
+		
 			//String pdriverDir = getDataConfigProperties("pdriverDir");
 
 //			 String pdriverDirFireFox = getDataConfigProperties("driverdirFirefox");
@@ -52,21 +55,21 @@ public class BasePage {
 				//System.setProperty("webdriver.chrome.driver", pdriverDir + "chromedriver.exe");
 				// create an instance of Chrome
 				driver = new ChromeDriver();
-				driver.get(URL);
+				driver.get(URL2);
 				driver.manage().window().maximize();
 				driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 			} else if (browser.equalsIgnoreCase("firefox")) {
 				WebDriverManager.firefoxdriver().setup();
 				//System.setProperty("webdriver.gecko.driver", pdriverDir + "geckodriver.exe");
 				driver = new FirefoxDriver();
-				driver.get(URL);
+				driver.get(URL2);
 				driver.manage().window().maximize();
 				driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 			} else if (browser.equalsIgnoreCase("edge")) {
 				WebDriverManager.edgedriver().setup();
 				//System.setProperty("webdriver.edge.driver", pdriverDir + "msedgedriver.exe");
 				driver = new EdgeDriver();
-				driver.get(URL);
+				driver.get(URL2);
 				driver.manage().window().maximize();
 				driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 			}
@@ -79,7 +82,8 @@ public class BasePage {
 		Properties p = new Properties();
 		InputStream is = null;
 		try {
-			is = new FileInputStream("config.properties"); // the config file name that we want to open
+			//is = new FileInputStream("config.properties"); // the config file name that we want to open
+			is = new FileInputStream("configDatePicker.properties"); 
 		} catch (FileNotFoundException e) { // if file does not exist, then we get a catch on the error
 			e.printStackTrace();
 		}
@@ -104,7 +108,7 @@ public class BasePage {
 
 	// Method: Click on an Element
 	public void clickElement(By pLocator) {
-		waitforClick(30, pLocator);
+		waitforClick(100, pLocator);
 		getElement(pLocator).click();
 	}
 
