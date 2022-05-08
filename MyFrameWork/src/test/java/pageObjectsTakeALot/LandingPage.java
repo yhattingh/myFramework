@@ -61,6 +61,10 @@ public class LandingPage extends BasePage{
 		
 	}
 	
+	public void clearSearchBarText() {
+		clearText(By.name("search"));
+	}
+	
 	public void clickSearchBar() {
 		clickElement(By.name("search"));
 	}

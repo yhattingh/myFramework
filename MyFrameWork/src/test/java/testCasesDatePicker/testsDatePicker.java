@@ -1,5 +1,6 @@
 package testCasesDatePicker;
 
+import org.openqa.selenium.By;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -13,6 +14,10 @@ public class testsDatePicker {
 	DatePickerBasePage datePickerBasePage = new DatePickerBasePage();
 	DateTimePickerPage dateTimePickerPage = new DateTimePickerPage();
 	
+	//initialise variables
+	String desiredDateTimeAM = "10/13/2012 10:30 AM";
+	String desiredDateTimePM = "10/13/2012 10:30 PM";
+	
 	@BeforeTest
 	public void setUp() {
 		datePickerBasePage.clickCookiesButton();
@@ -24,9 +29,14 @@ public class testsDatePicker {
 //	}
 	
 	@Test
-	public void datePickerTest1() throws InterruptedException{
-		dateTimePickerPage.selectDateFromDatePicker("10/13/2012 3:30 PM"); 
-	
+	public void datePickerTest() throws InterruptedException{
+		dateTimePickerPage.selectDateFromDatePicker(desiredDateTimeAM);
 	}
+	
+	@Test
+	public void enterDateTimeTest() {
+		dateTimePickerPage.enterDateTime(desiredDateTimePM);
+	}
+
 
 }

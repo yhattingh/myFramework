@@ -18,7 +18,8 @@ public class SelectedItemPage extends BasePage {
 //	}
 
 	public String getTextOfProductTitle() {
-		String text2 = getElementText(By.cssSelector("h1"));
+		//String text2 = getElementText(By.cssSelector("h1"));
+		String text2 = getElementText(By.xpath("//div[@id='shopfront-app']/div[4]/div/div[2]/div/div[2]/div/div/div[2]/div/div/div/div/h1"));
 		return text2;
 	}
 
@@ -28,16 +29,16 @@ public class SelectedItemPage extends BasePage {
 
 	public void selectClickShoeSize() {
 		clickElement(By.cssSelector(
-				"div:nth-of-type(5) > .button.has-tooltip.image-fallback.size.variant-selector-module_button-selector_1-w9B.variant-selector-module_image-button_1gV7u"));
+				"div:nth-of-type(3) > .button.has-tooltip.image-fallback.size.variant-selector-module_button-selector_1-w9B.variant-selector-module_image-button_1gV7u"));
 	}
 
 	public boolean addToCartButtonIsAvailable() {
-		waitForElement(10, By.cssSelector((".buybox-actions-module_add-to-cart-cell_3fXyS [href]")));
+		waitForElement(30, By.cssSelector((".buybox-actions-module_add-to-cart-cell_3fXyS")));
 		return true;
 	}
 
 	public void clickAddToCartButton() {
-		clickElement(By.cssSelector(".buybox-actions-module_add-to-cart-cell_3fXyS [href]"));
+		clickElement(By.cssSelector(".buybox-actions-module_add-to-cart-cell_3fXyS"));
 	}
 
 	public void clickAddToCartLink() {

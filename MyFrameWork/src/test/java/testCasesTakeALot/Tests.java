@@ -35,7 +35,7 @@ public class Tests {
 	DealsPage dealsPage = new DealsPage();
 	CheckOutPage checkOutPage = new CheckOutPage();
 	BasePageTakeALot basePageTakeAlot = new BasePageTakeALot();
-	SelectedItemPage selectedItem = new SelectedItemPage();
+	SelectedItemPage selectedItemPage = new SelectedItemPage();
 	SoftAssert softAssert = new SoftAssert();
 	ReadDataFromExcel readDataFromExcel = new ReadDataFromExcel();
 	ReadExcel readExcel = new ReadExcel();
@@ -48,12 +48,12 @@ public class Tests {
 
 	@AfterTest
 	public void cleanUp() throws InterruptedException {
-		selectedItem.cleanUp();
+		selectedItemPage.cleanUp();
 	}
-//	
+
 //	@AfterMethod
 //	public void closeChildWindow() {
-//		selectedItem.closeChildBrowserTab();
+//		selectedItemPage.closeChildBrowserTab();
 //	}
 
 	/*
@@ -89,7 +89,7 @@ public class Tests {
 	// 1
 	@Test
 	public void GIVEN_shopperIsOnTheLandingPage_WHEN_shopperClicksCartButton_THEN_ChecksThatShopperIsOnCartPage_THEN_CheckThatCartIsEmpty() {
-
+		
 	}
 
 	// 2a
@@ -97,24 +97,22 @@ public class Tests {
 	public void GIVEN_shopperIsOnTheLandingPage_WHEN_shopperEntersDKNYasTheSearchString_AND_shopperClicksTheSearchButton_THEN_DKNYDisplayedAsTheFirstItem() {
 
 		// Declare variables
-		String searchedText = "DKNY";
+		String searchedText = "DKNY Original";
 		String actualText; // to have all declared variables in one place but we cannot have actualText =
 							// selectedItem.getTextOfTitleElement(); here
 							// because it then expects we already have this variable which we only get in
 							// line 104
-		String expectedResult = searchedText;
+		String expectedResult = "DKNY";
 
 		//basePageTakeAlot.navigateToHomePage();
 		landingPage.clickSearchBar();
+		landingPage.clearSearchBarText();
 		landingPage.enterTextInSearchBar(searchedText);
 		landingPage.clickSearchButton();
-		resultsPage.clickFirstItem();
+		resultsPage.clickSecondItem();
 		resultsPage.switchToNewTab();
-		// System.out.println(selectedItem.getTextOfBrandLink());
-		actualText = selectedItem.getTextOfBrandLink();
+		actualText = selectedItemPage.getTextOfBrandLink();
 		System.out.println("Actual Result:" + " " + actualText);
-		// Reporter.log("Expected Text: " + searchedText + " and " + "Actual Text: " +
-		// actualText);
 		Reporter.log("Expected Result : " + expectedResult);
 		Reporter.log("Actual Result : " + actualText);
 		Assert.assertEquals(actualText, expectedResult);
@@ -123,7 +121,7 @@ public class Tests {
 
 	// 2b
 	@Test
-	public void GIVEN_shopperIsOnTheLandingPage_WHEN_shopperEntersHillsasTheSearchString_AND_shopperClicksTheSearchButton_THEN_HillsIsDisplayedAsTheSecondItem() {
+	public void GIVEN_shopperIsOnTheLandingPage_WHEN_shopperEntersHillsasTheSearchString_AND_shopperClicksTheSearchButton_THEN_HillsIsDisplayedAsTheSecondItem() throws InterruptedException {
 
 		// Declare variables
 		String searchedText = "Hills";
@@ -132,11 +130,12 @@ public class Tests {
 
 		//basePageTakeAlot.navigateToHomePage();
 		landingPage.clickSearchBar();
+		landingPage.clearSearchBarText();
 		landingPage.enterTextInSearchBar(searchedText);
 		landingPage.clickSearchButton();
 		resultsPage.clickSecondItem();
 		resultsPage.switchToNewTab();
-		actualText = selectedItem.getTextOfBrandLink();
+		actualText = selectedItemPage.getTextOfBrandLink();
 		System.out.println("Actual Result:" + " " + actualText);
 		Reporter.log("Expected Result : " + expectedResult);
 		Reporter.log("Actual Result : " + actualText);
@@ -155,11 +154,12 @@ public class Tests {
 
 //		basePageTakeAlot.navigateToHomePage();
 		landingPage.clickSearchBar();
+		landingPage.clearSearchBarText();
 		landingPage.enterTextInSearchBar(searchedText);
 		landingPage.clickSearchButton();
 		resultsPage.clickThirdItem();
 		resultsPage.switchToNewTab();
-		actualText = selectedItem.getTextOfBrandLink();
+		actualText = selectedItemPage.getTextOfBrandLink();
 		System.out.println("Actual Result:" + " " + actualText);
 		Reporter.log("Expected Result : " + expectedResult);
 		Reporter.log("Actual Text : " + actualText);
@@ -170,38 +170,35 @@ public class Tests {
 
 	// 2d
 	@Test
-	public void GIVEN_shopperIsOnTheLandingPage_WHEN_shopperEntersBootAsTheSearchString_AND_shopperClicksTheSearchButton_THEN_BootIsDisplayedAsTheThirdItem() {
+	public void GIVEN_shopperIsOnTheLandingPage_WHEN_shopperEntersBootAsTheSearchString_AND_shopperClicksTheSearchButton_THEN_BootIsDisplayedAsTheThirdItem() throws InterruptedException {
 
 		// Declare variables
-		String searchedProductInput = "Boot";
+		String searchedProductInput = "TTP";
 		String searchedBrand = "TTP";
 
 		String actualTextOfProductTitle;
-		String expectedProductResult = searchedProductInput;
-
 		String actualTextOfBrandLink;
-		String expectedTextOfBrandLink = searchedBrand;
 
-//		basePageTakeAlot.navigateToHomePage();
 		landingPage.clickSearchBar();
+		landingPage.clearSearchBarText();
 		landingPage.enterTextInSearchBar(searchedProductInput);
 		landingPage.clickSearchButton();
-		resultsPage.clickThirdItem();
+		resultsPage.clickFourthItem();
 		resultsPage.switchToNewTab();
-		actualTextOfProductTitle = selectedItem.getTextOfProductTitle();
-		System.out.println("Actual PRODUCT contains the word " + " " + expectedProductResult + " "
+		actualTextOfProductTitle = selectedItemPage.getTextOfProductTitle();
+		System.out.println("Actual PRODUCT contains the word " + " " + searchedProductInput + " "
 				+ "and the product text is" + " " + actualTextOfProductTitle);
-		actualTextOfBrandLink = selectedItem.getTextOfBrandLink();
+		actualTextOfBrandLink = selectedItemPage.getTextOfBrandLink();
 		System.out.println("Actual BRAND = " + actualTextOfBrandLink);
-		Reporter.log("Expected Product Title Result : " + expectedProductResult);
+		Reporter.log("Expected Product Title Result : " + searchedProductInput);
 		Reporter.log("Actual Product Title Result : " + actualTextOfProductTitle);
-		Reporter.log("Expected Brand Link  Result : " + expectedTextOfBrandLink);
+		Reporter.log("Expected Brand Link  Result : " + searchedBrand);
 		Reporter.log("Actual Brand Link Result : " + actualTextOfBrandLink);
-		Assert.assertTrue(actualTextOfProductTitle.contains(expectedProductResult));
-		Assert.assertEquals(actualTextOfBrandLink, expectedTextOfBrandLink);
+		Assert.assertTrue(actualTextOfProductTitle.contains(searchedProductInput));
+		Assert.assertEquals(actualTextOfBrandLink, searchedBrand);
 		softAssert.assertEquals(actualTextOfBrandLink, "who knows");
 		Reporter.log("Actual Result for softAssert " + actualTextOfBrandLink + " ; " + "printed result for softAssert: "
-				+ expectedProductResult);
+				+ searchedProductInput);
 		// softAssert.assertAll();
 		resultsPage.closeChildBrowserTab();
 	}
@@ -211,7 +208,7 @@ public class Tests {
 	public void GIVEN_shopperIsOnTheLandingPage_WHEN_shopperEntersHillsAsTheSearchString_AND_shopperClicksTheSearchButton_THEN_HillsIsDisplayedAsTheThirdItem() {
 
 		// Declare variables
-		String searchedProductInput = "Puppy";
+		String searchedProductInput = "Hills";
 		String searchedBrand = "Hills";
 
 		String actualTextOfProductTitle;
@@ -220,16 +217,16 @@ public class Tests {
 		String actualTextOfBrandLink;
 		String expectedTextOfBrandLink = searchedBrand;
 
-//		basePageTakeAlot.navigateToHomePage();
 		landingPage.clickSearchBar();
+		landingPage.clearSearchBarText();
 		landingPage.enterTextInSearchBar(searchedBrand);
 		landingPage.clickSearchButton();
 		resultsPage.clickThirdItem();
 		resultsPage.switchToNewTab();
-		actualTextOfProductTitle = selectedItem.getTextOfProductTitle();
+		actualTextOfProductTitle = selectedItemPage.getTextOfProductTitle();
 		System.out.println("Actual PRODUCT contains the word " + " " + expectedProductResult + " "
 				+ "and the product text is" + " " + actualTextOfProductTitle);
-		actualTextOfBrandLink = selectedItem.getTextOfBrandLink();
+		actualTextOfBrandLink = selectedItemPage.getTextOfBrandLink();
 		System.out.println("Actual BRAND = " + actualTextOfBrandLink);
 		Reporter.log("Expected Product Title Result : " + expectedProductResult);
 		Reporter.log("Actual Product Title Result : " + actualTextOfProductTitle);
@@ -246,11 +243,11 @@ public class Tests {
 			throws InterruptedException {
 
 		// Declare variables
-		String searchedProductInput = "TTP Women's Lace-Up Combat Boot XB1601 with Patent Finish";
-		String searchedBrand = "TTP";
+		String searchedProductInput = "EcoFlow RIVER Pro";
+		String searchedBrand = "EcoFlow";
 
 		String actualTextOfProductTitle;
-		String expectedProductResult = searchedProductInput;
+		String expectedProductResult = searchedBrand;
 
 		String actualTextOfBrandLink;
 		String expectedTextOfBrandLink = searchedBrand;
@@ -258,18 +255,18 @@ public class Tests {
 		String actualItemCount;
 		String expectedItemCount = "(1 item)";
 
-//		basePageTakeAlot.navigateToHomePage();
 		landingPage.clickSearchBar();
+		landingPage.clearSearchBarText();
 		landingPage.enterTextInSearchBar(searchedProductInput);
 		landingPage.clickSearchButton();
-		resultsPage.clickFirstItem();
+		resultsPage.clickSecondItem();
 		resultsPage.switchToNewTab();
 
-		actualTextOfProductTitle = selectedItem.getTextOfProductTitle();
+		actualTextOfProductTitle = selectedItemPage.getTextOfProductTitle();
 		System.out.println("Actual PRODUCT contains the word " + " " + expectedProductResult + " "
 				+ "and the product text is" + " " + actualTextOfProductTitle);
 
-		actualTextOfBrandLink = selectedItem.getTextOfBrandLink();
+		actualTextOfBrandLink = selectedItemPage.getTextOfBrandLink();
 		System.out.println("Actual BRAND = " + actualTextOfBrandLink);
 
 		Reporter.log("Expected Product Title Result : " + expectedProductResult);
@@ -277,15 +274,11 @@ public class Tests {
 		Reporter.log("Expected Brand Link  Result : " + expectedTextOfBrandLink);
 		Reporter.log("Actual Brand Link Result : " + actualTextOfBrandLink);
 
-		Assert.assertTrue(actualTextOfProductTitle.contains(expectedProductResult));
+		Assert.assertTrue(actualTextOfProductTitle.contains(searchedBrand));
 		Assert.assertEquals(actualTextOfBrandLink, expectedTextOfBrandLink);
 
-		selectedItem.selectColour();
-		selectedItem.selectClickShoeSize();
-		Assert.assertTrue(selectedItem.addToCartButtonIsAvailable());
-
-		selectedItem.clickAddToCartLink();
-		selectedItem.clickGoToCartButton();
+		selectedItemPage.clickAddToCartLink();
+		selectedItemPage.clickGoToCartButton();
 
 		// my method
 		actualItemCount = cartPage.checkCartCount();
@@ -298,42 +291,43 @@ public class Tests {
 		Assert.assertEquals(cartPage.checkCartItemCount("(1 item)"), true);
 		cartPage.selectQuantity("2");
 		Assert.assertEquals(cartPage.checkCartItemCount("(2 items)"), true);
-
+		
+		resultsPage.closeChildBrowserTab();
 	}
 
 	// 2G - verify the unit price
-	@Test
-	public void GIVEN_shopperIsOnTheLandingPage_WHEN_shopperEntersBootAsTheSearchString_AND_shopperSelectsAnItem_THEN_shopperChecksUnitPrice_AND_addItemToCart()
-			throws InterruptedException {
-
-		// Declare variables
-		String searchedProductInput = "TTP Women's Lace-Up Combat Boot XB1601 with Patent Finish";
+//	@Test
+//	public void GIVEN_shopperIsOnTheLandingPage_WHEN_shopperEntersBootAsTheSearchString_AND_shopperSelectsAnItem_THEN_shopperChecksUnitPrice_AND_addItemToCart()
+//			throws InterruptedException {
+//
+//		// Declare variables
+//		String searchedProductInput = "TTP Women's Lace-Up Combat Boot XB1601 with Patent Finish";
 
 //		basePageTakeAlot.navigateToHomePage();
-		landingPage.clickSearchBar();
-		landingPage.enterTextInSearchBar(searchedProductInput);
-		landingPage.clickSearchButton();
-		resultsPage.clickFirstItem();
-		resultsPage.switchToNewTab();
+//		landingPage.clickSearchBar();
+//		landingPage.enterTextInSearchBar(searchedProductInput);
+//		landingPage.clickSearchButton();
+//		resultsPage.clickFirstItem();
+//		resultsPage.switchToNewTab();
+//
+//		selectedItemPage.selectColour();
+//		selectedItemPage.selectClickShoeSize();
+//		Assert.assertTrue(selectedItemPage.addToCartButtonIsAvailable());
 
-		selectedItem.selectColour();
-		selectedItem.selectClickShoeSize();
-		Assert.assertTrue(selectedItem.addToCartButtonIsAvailable());
-
-		int unitPrice = selectedItem.getUnitPrice();
-		System.out.println("Unit Price is R " + unitPrice);
-		Reporter.log("The unit price is R" + unitPrice);
-
-		selectedItem.clickAddToCartLink();
-		selectedItem.clickGoToCartButton();
-
-		Assert.assertEquals(cartPage.checkCartItemCount("(1 item)"), true); // "(1 item)" = checkCount on
-																			// checkCartItemCount method
-		cartPage.selectQuantity("2");
-		Assert.assertEquals(cartPage.checkCartItemCount("(2 items)"), true);
-		// cartPage.closeChildBrowserTab();
-
-	}
+//		int unitPrice = selectedItemPage.getUnitPrice();
+//		System.out.println("Unit Price is R " + unitPrice);
+//		Reporter.log("The unit price is R" + unitPrice);
+//
+//		selectedItemPage.clickAddToCartLink();
+//		selectedItemPage.clickGoToCartButton();
+//
+//		Assert.assertEquals(cartPage.checkCartItemCount("(1 item)"), true); // "(1 item)" = checkCount on
+//																			// checkCartItemCount method
+//		cartPage.selectQuantity("2");
+//		Assert.assertEquals(cartPage.checkCartItemCount("(2 items)"), true);
+//		cartPage.closeChildBrowserTab();
+//
+//	}
 
 	// 2G - verify the unit price and strip out the comma in the price and empty
 	// cart
@@ -346,17 +340,18 @@ public class Tests {
 
 //		basePageTakeAlot.navigateToHomePage();
 		landingPage.clickSearchBar();
+		landingPage.clearSearchBarText();
 		landingPage.enterTextInSearchBar(searchedProductInput);
 		landingPage.clickSearchButton();
 		resultsPage.clickSecondItem();
 		resultsPage.switchToNewTab();
 
-		int unitPrice = selectedItem.getUnitPrice();
+		int unitPrice = selectedItemPage.getUnitPrice();
 		System.out.println("Unit Price is R " + unitPrice);
 		Reporter.log("The unit price is R" + unitPrice);
 
-		selectedItem.clickAddToCartLink();
-		selectedItem.clickGoToCartButton();
+		selectedItemPage.clickAddToCartLink();
+		selectedItemPage.clickGoToCartButton();
 
 		Assert.assertEquals(cartPage.checkCartItemCount("(1 item)"), true); // "(1 item)" = checkCount on
 																			// checkCartItemCount method
@@ -368,7 +363,7 @@ public class Tests {
 		Assert.assertEquals(cartPage.checkEmptyCart(), true);
 		Assert.assertEquals(cartPage.checkEmptyCartWithIsDisplayed(), true);
 		Reporter.log("Removed from cart? " + cartPage.checkEmptyCart());
-
+		resultsPage.closeChildBrowserTab();
 	}
 
 	// 2H - verify cart is empty
@@ -384,6 +379,7 @@ public class Tests {
 		// Assert.assertEquals(landingPage.cartSummary2("0"), true); //enter expected
 		// number
 		Assert.assertEquals(landingPage.cartSummary2(expectedResult), true); // use variable declared
+		
 
 	}
 
@@ -398,13 +394,14 @@ public class Tests {
 
 //		basePageTakeAlot.navigateToHomePage();
 		landingPage.clickSearchBar();
+		landingPage.clearSearchBarText();
 		landingPage.enterTextInSearchBar(searchedProductInput);
 		landingPage.clickSearchButton();
 		resultsPage.clickSecondItem();
 		resultsPage.switchToNewTab();
 
-		selectedItem.clickAddToCartLink();
-		selectedItem.clickGoToCartButton();
+		selectedItemPage.clickAddToCartLink();
+		selectedItemPage.clickGoToCartButton();
 
 		Assert.assertEquals(cartPage.checkCartItemCount("(1 item)"), true);
 		cartPage.selectQuantity(qty);
@@ -414,7 +411,6 @@ public class Tests {
 		cartPage.removeFromCart();
 		Assert.assertTrue(cartPage.checkEmptyCart());
 		cartPage.closeChildBrowserTab();
-
 	}
 
 //	@Test(dataProvider = "TakeALot", dataProviderClass = ReadDataFromExcel.class)
@@ -444,7 +440,5 @@ public class Tests {
 //		cartPage.closeChildBrowserTab();
 //
 //	}
-
-	// replace thread.sleep with another solution for the itemCount method
 
 }

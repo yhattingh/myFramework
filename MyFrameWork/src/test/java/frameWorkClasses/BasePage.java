@@ -40,8 +40,6 @@ public class BasePage {
 			// When using the config properties file: Set Parameter values === in the config file it is referred to properties and values
 			String browser = getDataConfigProperties("browser");
 			String URL = getDataConfigProperties("URL");
-			String URL2 = getDataConfigProperties("URL2");
-
 		
 			//String pdriverDir = getDataConfigProperties("pdriverDir");
 
@@ -55,44 +53,25 @@ public class BasePage {
 				//System.setProperty("webdriver.chrome.driver", pdriverDir + "chromedriver.exe");
 				// create an instance of Chrome
 				driver = new ChromeDriver();
-				driver.get(URL2);
+				driver.get(URL);
 				driver.manage().window().maximize();
 				driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 			} else if (browser.equalsIgnoreCase("firefox")) {
 				WebDriverManager.firefoxdriver().setup();
 				//System.setProperty("webdriver.gecko.driver", pdriverDir + "geckodriver.exe");
 				driver = new FirefoxDriver();
-				driver.get(URL2);
+				driver.get(URL);
 				driver.manage().window().maximize();
 				driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 			} else if (browser.equalsIgnoreCase("edge")) {
 				WebDriverManager.edgedriver().setup();
 				//System.setProperty("webdriver.edge.driver", pdriverDir + "msedgedriver.exe");
 				driver = new EdgeDriver();
-				driver.get(URL2);
+				driver.get(URL);
 				driver.manage().window().maximize();
 				driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 			}
 		}
-	}
-
-	// Create a method to read the config file
-	public String getDataConfigProperties(String propertyName) { // propertyName will be the browser that we are passing in
-		// Properties set
-		Properties p = new Properties();
-		InputStream is = null;
-		try {
-			//is = new FileInputStream("config.properties"); // the config file name that we want to open
-			is = new FileInputStream("configDatePicker.properties"); 
-		} catch (FileNotFoundException e) { // if file does not exist, then we get a catch on the error
-			e.printStackTrace();
-		}
-		try {
-			p.load(is); // load the properties object, and pass in is (InputStream) which is the file
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return p.getProperty(propertyName); // the property values are returned
 	}
 
 	// Method: Cleanup e.g. Close driver
@@ -144,6 +123,31 @@ public class BasePage {
 		driver.findElement(pLocator).sendKeys(enterText);
 	}
 
+	// Create a method to read the config file
+	public String getDataConfigProperties(String propertyName) { // propertyName will be the browser that we are passing in
+		// Properties set
+		Properties p = new Properties();
+		InputStream is = null;
+		try {
+			//is = new FileInputStream("config.properties"); // the config file name that we want to open
+			is = new FileInputStream("config.properties"); 
+		} catch (FileNotFoundException e) { // if file does not exist, then we get a catch on the error
+			e.printStackTrace();
+		}
+		try {
+			p.load(is); // load the properties object, and pass in is (InputStream) which is the file
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return p.getProperty(propertyName); // the property values are returned
+	}
+
+	// Method: Get Element
+	public WebElement getElement(By pLocator) {
+		waitforClick(30, pLocator);
+		return driver.findElement(pLocator);
+	}
+
 	// Method: Get text on Element
 	public String getElementText(By pLocator) {
 		String elementText = getElement(pLocator).getText();
@@ -155,12 +159,6 @@ public class BasePage {
 		String elementText = getElement(pLocator).getAttribute("innerHTML");
 		System.out.println(elementText);
 		return elementText;
-	}
-
-	// Method: Get Element
-	public WebElement getElement(By pLocator) {
-		waitforClick(30, pLocator);
-		return driver.findElement(pLocator);
 	}
 
 	// Method: Get title
@@ -202,17 +200,17 @@ public class BasePage {
 		driver.switchTo().window(parentWindowID); // switch to new parent
 	}
 
+	// ...Wait for Click
+	public void waitforClick(int elementWait, By pLocator) {
+		WebDriverWait wait = new WebDriverWait(driver, elementWait);
+		wait.until(ExpectedConditions.elementToBeClickable(pLocator));
+	}
+
 	// Wait Methods: Wait for Element, Wait for Click
 	// ...Wait for Element
 	public void waitForElement(int elementWait, By pLocator) {
 		WebDriverWait wait = new WebDriverWait(driver, elementWait);
 		wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(pLocator));
-	}
-
-	// ...Wait for Click
-	public void waitforClick(int elementWait, By pLocator) {
-		WebDriverWait wait = new WebDriverWait(driver, elementWait);
-		wait.until(ExpectedConditions.elementToBeClickable(pLocator));
 	}
 
 	// ...Wait for URL

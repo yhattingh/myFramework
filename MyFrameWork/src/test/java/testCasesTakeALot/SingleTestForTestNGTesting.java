@@ -47,6 +47,7 @@ public class SingleTestForTestNGTesting {
 	@Test(dataProvider = "TakeALot", dataProviderClass = ReadDataFromExcel.class)
 	public void GIVEN_shopperOnLandingPage_WHEN_productSelectedFromExcel_THEN_addsToCart(String searchInput, String qty)
 			throws InterruptedException {
+		System.out.println("Small test");
 		System.out.println("What am I reading from excel?" + " " + searchInput + " " + qty);
 
 		// Declare variables
@@ -71,7 +72,7 @@ public class SingleTestForTestNGTesting {
 		Reporter.log("This is what I expect: " + qty);
 		cartPage.removeFromCart();
 		Assert.assertTrue(cartPage.checkEmptyCart());
-		cartPage.closeChildBrowserTab();
+//		cartPage.closeChildBrowserTab();
 
 	}
 

@@ -14,17 +14,27 @@ public class ResultsPage extends BasePage{
 	 * 
 	 */
 	
+	public void clickOnlyItem() {
+		clickElement(By.cssSelector(".product-anchor.product-card-module_product-anchor_TUCBV"));
+	}
+	
 	public void clickFirstItem() {
 		clickElement(By.cssSelector("div:nth-of-type(1) > .grid.search-product  .product-anchor.product-card-module_product-anchor_TUCBV"));
 	}
 	
 	public void clickSecondItem() {
-		clickElement(By.cssSelector("div:nth-of-type(3) > .grid.search-product  .product-anchor.product-card-module_product-anchor_TUCBV"));
+		clickElement(By.cssSelector("div:nth-of-type(2) > .grid.search-product  .product-anchor.product-card-module_product-anchor_TUCBV"));
 	}
 	
 	public void clickThirdItem() {
+		clickElement(By.cssSelector("div:nth-of-type(3) > .grid.search-product  .product-anchor.product-card-module_product-anchor_TUCBV"));
+	}
+	
+	public void clickFourthItem() {
 		clickElement(By.cssSelector("div:nth-of-type(4) > .grid.search-product  .product-anchor.product-card-module_product-anchor_TUCBV"));
 	}
+	
+	
 	
 	public boolean checkItemName(String checkItemName) {
 		return false;

@@ -3,12 +3,13 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="testCasesDatePicker.testsDatePicker">
+      <class name="testCasesTakeALot.Tests">
         <methods>
-          <include name="datePickerTest1"/>
           <include name="setUp"/>
+          <include name="cleanUp"/>
+          <include name="GIVEN_shopperIsOnTheLandingPage_WHEN_shopperHoversOverTrollie_THEN_displayItemCount"/>
         </methods>
-      </class> <!-- testCasesDatePicker.testsDatePicker -->
+      </class> <!-- testCasesTakeALot.Tests -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
