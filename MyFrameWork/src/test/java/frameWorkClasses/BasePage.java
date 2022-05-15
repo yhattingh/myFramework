@@ -1,9 +1,11 @@
 package frameWorkClasses;
 
+import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 import java.util.Iterator;
 import java.util.Properties;
 import java.util.Set;
@@ -18,6 +20,9 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.pdfbox.pdmodel.PDDocument;
+import org.pdfbox.util.PDFTextStripper;
+import org.testng.Assert;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
@@ -32,16 +37,18 @@ public class BasePage {
 
 	public BasePage() {
 		if (driver == null) {
-			// Set Parameter values === in the config file it is referred to properties and values
+			// Set Parameter values === in the config file it is referred to properties and
+			// values
 //			String browser = "chrome";	
 //			String URL = "https://www.takealot.com/";
 //			String pdriverDir = "C:\\Selenium\\";
-			
-			// When using the config properties file: Set Parameter values === in the config file it is referred to properties and values
+
+			// When using the config properties file: Set Parameter values === in the config
+			// file it is referred to properties and values
 			String browser = getDataConfigProperties("browser");
 			String URL = getDataConfigProperties("URL");
-		
-			//String pdriverDir = getDataConfigProperties("pdriverDir");
+
+			// String pdriverDir = getDataConfigProperties("pdriverDir");
 
 //			 String pdriverDirFireFox = getDataConfigProperties("driverdirFirefox");
 //			 String pdriverDirEdge = getDataConfigProperties("driverdirEdge");
@@ -50,7 +57,8 @@ public class BasePage {
 			if (browser.equalsIgnoreCase("chrome")) {
 				WebDriverManager.chromedriver().setup(); // auto-update chrome web driver
 				// Set path to chromedriver.exe
-				//System.setProperty("webdriver.chrome.driver", pdriverDir + "chromedriver.exe");
+				// System.setProperty("webdriver.chrome.driver", pdriverDir +
+				// "chromedriver.exe");
 				// create an instance of Chrome
 				driver = new ChromeDriver();
 				driver.get(URL);
@@ -58,14 +66,14 @@ public class BasePage {
 				driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 			} else if (browser.equalsIgnoreCase("firefox")) {
 				WebDriverManager.firefoxdriver().setup();
-				//System.setProperty("webdriver.gecko.driver", pdriverDir + "geckodriver.exe");
+				// System.setProperty("webdriver.gecko.driver", pdriverDir + "geckodriver.exe");
 				driver = new FirefoxDriver();
 				driver.get(URL);
 				driver.manage().window().maximize();
 				driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 			} else if (browser.equalsIgnoreCase("edge")) {
 				WebDriverManager.edgedriver().setup();
-				//System.setProperty("webdriver.edge.driver", pdriverDir + "msedgedriver.exe");
+				// System.setProperty("webdriver.edge.driver", pdriverDir + "msedgedriver.exe");
 				driver = new EdgeDriver();
 				driver.get(URL);
 				driver.manage().window().maximize();
@@ -124,13 +132,15 @@ public class BasePage {
 	}
 
 	// Create a method to read the config file
-	public String getDataConfigProperties(String propertyName) { // propertyName will be the browser that we are passing in
+	public String getDataConfigProperties(String propertyName) { // propertyName will be the browser that we are passing
+																	// in
 		// Properties set
 		Properties p = new Properties();
 		InputStream is = null;
 		try {
-			//is = new FileInputStream("config.properties"); // the config file name that we want to open
-			is = new FileInputStream("config.properties"); 
+			// is = new FileInputStream("configDatePicker.properties"); // the config file
+			// name that we want to open
+			is = new FileInputStream("config.properties");
 		} catch (FileNotFoundException e) { // if file does not exist, then we get a catch on the error
 			e.printStackTrace();
 		}
@@ -171,6 +181,39 @@ public class BasePage {
 	public String getURL() {
 		String getCurrentURL = driver.getCurrentUrl();
 		return getCurrentURL;
+	}
+
+	// READ FROM A PDF DOCUMENT
+	public String readPDFContent(String appUrl, int expectedNoPages) throws Exception {
+
+		URL url = new URL(appUrl);
+		InputStream input = url.openStream();
+		BufferedInputStream fileToParse = new BufferedInputStream(input);
+		PDDocument document = null;
+		String output = null;
+
+		try {
+			document = PDDocument.load(fileToParse);
+			output = new PDFTextStripper().getText(document);
+			// ensure the number of pages is correct
+			int numberOfPages = getPageCount(document);
+			Assert.assertEquals(numberOfPages, expectedNoPages);
+
+		} finally { // finally always executes when the try block exists
+					// catch will not execute if the try passes, but finally will ALWAYS be executed - fail or pass
+			if (document != null) {
+				document.close();
+			}
+			fileToParse.close();
+			input.close();
+		}
+		return output;
+	}
+
+	public int getPageCount(PDDocument doc) { // this is part of readPDFContent
+		// get the total number of pages in the pdf document
+		int pageCount = doc.getNumberOfPages();
+		return pageCount;
 	}
 
 	// Method: Select from drop-down

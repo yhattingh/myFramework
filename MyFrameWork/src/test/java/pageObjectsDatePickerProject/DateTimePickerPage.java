@@ -99,11 +99,16 @@ public class DateTimePickerPage extends BasePage {
 		for (WebElement webElement : list_AllTimes) {
 			// System.out.println("Print the webElement list:" + webElement.getText());
 			if (webElement.getText().equalsIgnoreCase(desiredDateTime)) {
-				System.out.println("Selected time: " + webElement.getText());
-				System.out.println("Desired time: " + desiredDateTime);
+				System.out.println("Selected time @: " + webElement.getText());
+				System.out.println("Desired time @: " + desiredDateTime);
 				webElement.click();
-			} else {
-				System.out.println("Invalid time selected");
+			} 
+			
+			else if (desiredDateTime != webElement.getText()){
+				System.out.println("ERROR: Select from the following webElement list:" + webElement.getText());
+			} 
+			else {
+				System.out.println("Invalid time selected again..");
 			}
 		}
 	}

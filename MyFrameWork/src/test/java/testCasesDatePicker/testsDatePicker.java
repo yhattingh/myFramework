@@ -16,7 +16,7 @@ public class testsDatePicker {
 	
 	//initialise variables
 	String desiredDateTimeAM = "10/13/2012 10:30 AM";
-	String desiredDateTimePM = "10/13/2012 10:30 PM";
+	String desiredDateTimePM = "10/13/2012 10:00 PM";
 	
 	@BeforeTest
 	public void setUp() {
@@ -34,8 +34,8 @@ public class testsDatePicker {
 	}
 	
 	@Test
-	public void enterDateTimeTest() {
-		dateTimePickerPage.enterDateTime(desiredDateTimePM);
+	public void enterDateTimeText() {
+		dateTimePickerPage.enterDateTime(desiredDateTimeAM);
 	}
 
 

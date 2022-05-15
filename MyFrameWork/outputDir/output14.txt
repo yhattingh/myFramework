@@ -1,0 +1,12 @@
+EcoFlow RIVER Pro,3,This is the correct result
+dkny,1,This is the correct result
+boots,1,This is the correct result
+UPS,1,This is the correct result
+EcoFlow RIVER Pro,3,This is the correct result
+water,1,This is the correct result
+hill,1,This is the correct result
+dkny,1,This is the correct result
+boots,1,This is the correct result
+UPS,1,This is the correct result
+water,1,This is the correct result
+hill,1,This is the correct result

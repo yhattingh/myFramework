@@ -7,7 +7,7 @@
         <methods>
           <include name="setUp"/>
           <include name="cleanUp"/>
-          <include name="GIVEN_shopperIsOnTheLandingPage_WHEN_shopperHoversOverTrollie_THEN_displayItemCount"/>
+          <include name="shouldReadFromAndWriteToFile" invocation-numbers="1 2 3 4"/>
         </methods>
       </class> <!-- testCasesTakeALot.Tests -->
     </classes>

@@ -39,6 +39,7 @@ public class Tests {
 	SoftAssert softAssert = new SoftAssert();
 	ReadDataFromExcel readDataFromExcel = new ReadDataFromExcel();
 	ReadExcel readExcel = new ReadExcel();
+	WriteDataToFile writeDataToFile = new WriteDataToFile();
 
 	@BeforeTest
 	public void setUp() {
@@ -56,40 +57,26 @@ public class Tests {
 //		selectedItemPage.closeChildBrowserTab();
 //	}
 
-	/*
-	 * 1 GIVEN the shopper is on the landing page WHEN the shopper clicks on the
-	 * Cart button THEN check that the shopper is on the cart page AND check that
-	 * Cart is empty is displayed
-	 */
+	@Test
+	public void checkPDF() throws Exception {
+		// variable to store where the pdf is (can also be setup in the
+		// config.properties file)
+		String pdfURL = "file:///C:/autoProgram/myFramework/MyFrameWork/target/ISO Standards.pdf";
+		// check number of the pages in the pdf
 
-	/*
-	 * 2a GIVEN the shopper is on the landing page WHEN he enters "DKNY" as the
-	 * search string WHEN clicks the search button THEN "DKNY" is displayed as the
-	 * first item in the grid WHEN going to the home page
-	 */
+		// declare a variable for the expected number of pages
+		int expectedNoPages = 11; // no need to assert here, this will be tested
 
-	/*
-	 * 2b GIVEN the shopper is on the landing page WHEN he enters "hills" as the
-	 * search string WHEN clicks the search button THEN "hilss" is displayed as the
-	 * first item in the grid WHEN going to the home page
-	 */
-
-	/*
-	 * 3 GIVEN the shopper selected an item WHEN the shopper adds the item to the
-	 * cart THEN item is added to the cart
-	 */
-
-	/*
-	 * 4 demo - Antoinette LandingPage.checkLandingPageNavigation();
-	 * LandingPage.selectItem("DailyDeals"); DealsPage.checkURL("Takealot/deals");
-	 * DealsPage.checkFirstItem("PhillipsAirFryer")
-	 */
-	// GIVEN_shopperIsOnTheLandingPage_WHEN_shopperClicksOnDailyDeals_THEN_checkURL_AND_checkFirstItem
+		// read the contents of the pdf
+		String pdfContent = landingPage.readPDFContent(pdfURL, expectedNoPages);
+		// assert that the pdf contains certain text
+		Assert.assertTrue(pdfContent.contains("engineering"));
+	}
 
 	// 1
 	@Test
 	public void GIVEN_shopperIsOnTheLandingPage_WHEN_shopperClicksCartButton_THEN_ChecksThatShopperIsOnCartPage_THEN_CheckThatCartIsEmpty() {
-		
+
 	}
 
 	// 2a
@@ -104,7 +91,7 @@ public class Tests {
 							// line 104
 		String expectedResult = "DKNY";
 
-		//basePageTakeAlot.navigateToHomePage();
+		// basePageTakeAlot.navigateToHomePage();
 		landingPage.clickSearchBar();
 		landingPage.clearSearchBarText();
 		landingPage.enterTextInSearchBar(searchedText);
@@ -121,14 +108,15 @@ public class Tests {
 
 	// 2b
 	@Test
-	public void GIVEN_shopperIsOnTheLandingPage_WHEN_shopperEntersHillsasTheSearchString_AND_shopperClicksTheSearchButton_THEN_HillsIsDisplayedAsTheSecondItem() throws InterruptedException {
+	public void GIVEN_shopperIsOnTheLandingPage_WHEN_shopperEntersHillsasTheSearchString_AND_shopperClicksTheSearchButton_THEN_HillsIsDisplayedAsTheSecondItem()
+			throws InterruptedException {
 
 		// Declare variables
 		String searchedText = "Hills";
 		String actualText;
 		String expectedResult = searchedText;
 
-		//basePageTakeAlot.navigateToHomePage();
+		// basePageTakeAlot.navigateToHomePage();
 		landingPage.clickSearchBar();
 		landingPage.clearSearchBarText();
 		landingPage.enterTextInSearchBar(searchedText);
@@ -170,7 +158,8 @@ public class Tests {
 
 	// 2d
 	@Test
-	public void GIVEN_shopperIsOnTheLandingPage_WHEN_shopperEntersBootAsTheSearchString_AND_shopperClicksTheSearchButton_THEN_BootIsDisplayedAsTheThirdItem() throws InterruptedException {
+	public void GIVEN_shopperIsOnTheLandingPage_WHEN_shopperEntersBootAsTheSearchString_AND_shopperClicksTheSearchButton_THEN_BootIsDisplayedAsTheThirdItem()
+			throws InterruptedException {
 
 		// Declare variables
 		String searchedProductInput = "TTP";
@@ -291,7 +280,7 @@ public class Tests {
 		Assert.assertEquals(cartPage.checkCartItemCount("(1 item)"), true);
 		cartPage.selectQuantity("2");
 		Assert.assertEquals(cartPage.checkCartItemCount("(2 items)"), true);
-		
+
 		resultsPage.closeChildBrowserTab();
 	}
 
@@ -379,7 +368,6 @@ public class Tests {
 		// Assert.assertEquals(landingPage.cartSummary2("0"), true); //enter expected
 		// number
 		Assert.assertEquals(landingPage.cartSummary2(expectedResult), true); // use variable declared
-		
 
 	}
 
@@ -391,6 +379,37 @@ public class Tests {
 
 		// Declare variables
 		String searchedProductInput = searchInput;
+
+		writeDataToFile.writingToFile(searchedProductInput, qty);
+
+		landingPage.clickSearchBar();
+		landingPage.clearSearchBarText();
+		landingPage.enterTextInSearchBar(searchedProductInput);
+		landingPage.clickSearchButton();
+		resultsPage.clickSecondItem();
+		resultsPage.switchToNewTab();
+
+		selectedItemPage.clickAddToCartLink();
+		selectedItemPage.clickGoToCartButton();
+
+		Assert.assertEquals(cartPage.checkCartItemCount("(1 item)"), true);
+		cartPage.selectQuantity(qty);
+		Assert.assertEquals(cartPage.checkCartItemCount(qty), true);
+		System.out.println("This is what I expect: " + qty);
+		Reporter.log("This is what I expect: " + qty);
+		cartPage.removeFromCart();
+		Assert.assertTrue(cartPage.checkEmptyCart());
+		cartPage.closeChildBrowserTab();
+	}
+
+	@Test(dataProvider = "Brand and Quantity", dataProviderClass = ReadDataFromExcel.class)
+	public void shouldReadFromAndWriteToFile(String searchInput, String qty) throws InterruptedException {
+		System.out.println("What am I reading from excel?" + " " + searchInput + " " + qty);
+
+		// Declare variables
+		String searchedProductInput = searchInput;
+
+		writeDataToFile.writingToFile(searchedProductInput, qty);
 
 //		basePageTakeAlot.navigateToHomePage();
 		landingPage.clickSearchBar();
